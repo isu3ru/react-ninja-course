@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "title": "First Post",
+      "body": "lorem ipsum dolor",
+      "author": "Isuru",
+      "id": 1
+    },
+    {
+      "title": "Second Post",
+      "body": "Amet sit dolor lorem",
+      "author": "Chamikara",
+      "id": 2
+    },
+    {
+      "title": "Third Post",
+      "body": "ipsum dolor lorem sit amet",
+      "author": "Isuru",
+      "id": 3
+    }
+  ]
+}
