@@ -23,16 +23,36 @@ const Home = () => {
       id: 3,
     },
   ]);
+
+  const handleDelete = (id) => {
+    // filter through the blog posts entries and return the entries without the given id
+    const filteredBlogPosts = blogPosts.filter(
+      (blogPost) => blogPost.id !== id
+    );
+    // in a real world application, we can remove the item from db too, at this moment.
+    // set the filtered list as the blogPosts
+    setBlogPosts(filteredBlogPosts);
+  };
+
   return (
     <div className="home">
-      <BlogList blogPosts={blogPosts} title="All Blog Posts" />
       <BlogList
-        blogPosts={blogPosts.filter((post) => post.author === "Isuru")}
-        title="Isuru's Blog Posts"
+        blogPosts={blogPosts}
+        title="All Blog Posts"
+        // passing the handleDelete function as a prop
+        handleDelete={handleDelete}
       />
       <BlogList
+        // get only the list of posts authored by Isuru
+        blogPosts={blogPosts.filter((post) => post.author === "Isuru")}
+        title="Isuru's Blog Posts"
+        handleDelete={handleDelete}
+      />
+      <BlogList
+        // get only the list of posts authored by Chamikara
         blogPosts={blogPosts.filter((post) => post.author === "Chamikara")}
         title="Chamikara's Blog Posts"
+        handleDelete={handleDelete}
       />
     </div>
   );
