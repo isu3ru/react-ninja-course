@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
@@ -24,6 +24,8 @@ const Home = () => {
     },
   ]);
 
+  const [name, setName] = useState("Isuru");
+
   const handleDelete = (id) => {
     // filter through the blog posts entries and return the entries without the given id
     const filteredBlogPosts = blogPosts.filter(
@@ -33,6 +35,10 @@ const Home = () => {
     // set the filtered list as the blogPosts
     setBlogPosts(filteredBlogPosts);
   };
+
+  useEffect(() => {
+    console.log("use effect triggered");
+  }, [name]);
 
   return (
     <div className="home">
@@ -54,6 +60,8 @@ const Home = () => {
         title="Chamikara's Blog Posts"
         handleDelete={handleDelete}
       />
+      <button onClick={() => setName("Isuru Ranawaka")}>Change Name</button>
+      <p>{name}</p>
     </div>
   );
 };
