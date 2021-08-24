@@ -11,7 +11,8 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(url)
+    const abortController = new AbortController();
+    fetch(url, { signal: abortController.signal })
       .then((res) => {
         // you can check for HTTP status codes like 200, 404, etc... here
         if (!res.status === 200) {
@@ -27,9 +28,13 @@ const useFetch = (url) => {
         setError(null);
       })
       .catch((err) => {
-        setError(err.message);
-        setIsPending(false);
+        if (err.name !== "AbortError") {
+          setError(err.message);
+          setIsPending(false);
+        }
       });
+
+    return () => abortController.abort();
   }, [url]);
 
   return { data, isPending, error }; // return the props. this allows to use this hook like: 'const { data, isPending, error} = useFetch('http://localhost);' where this hook is used.
